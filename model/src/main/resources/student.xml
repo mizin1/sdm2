@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<student>
+	<id>2</id>
+	<name>Jan</name>
+	<surname>Kowalski</surname>
+	<courses>
+		<course>
+			<name>Analiza</name>
+			<degree>2.0</degree>
+		</course>
+		<course>
+			<name>Algebra</name>
+			<degree>3.5</degree>
+		</course>
+	</courses>
+</student>

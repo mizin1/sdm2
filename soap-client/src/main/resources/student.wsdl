@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.sdm.mizinski.waw.pl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="StudentServiceService" targetNamespace="http://soap.sdm.mizinski.waw.pl/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soap.sdm.mizinski.waw.pl/" elementFormDefault="unqualified" targetNamespace="http://soap.sdm.mizinski.waw.pl/" version="1.0">
+
+  <xs:element name="getStudent" type="tns:getStudent"/>
+
+  <xs:element name="getStudentResponse" type="tns:getStudentResponse"/>
+
+  <xs:element name="student" type="tns:student"/>
+
+  <xs:complexType name="getStudent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getStudentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="student" type="tns:student"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="student">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="surname" type="xs:string"/>
+      <xs:element minOccurs="0" name="courses">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="course" type="tns:course"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="course">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="degree" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getStudent">
+    <wsdl:part element="tns:getStudent" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStudentResponse">
+    <wsdl:part element="tns:getStudentResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="StudentService">
+    <wsdl:operation name="getStudent">
+      <wsdl:input message="tns:getStudent" name="getStudent">
+    </wsdl:input>
+      <wsdl:output message="tns:getStudentResponse" name="getStudentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="StudentServiceServiceSoapBinding" type="tns:StudentService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getStudent">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getStudent">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStudentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StudentServiceService">
+    <wsdl:port binding="tns:StudentServiceServiceSoapBinding" name="StudentServicePort">
+      <soap:address location="http://localhost:8080/service"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
